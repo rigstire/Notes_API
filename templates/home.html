@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} Home Page {% endblock title %} 
+
+{% block content %}
+
+{% for notes in object_list %}
+<div>
+
+<h2><a href="{% url 'notes_detail' notes.pk %}">{{ notes.title }}</a></h2>
+</div>
+
+{% endfor %}
+
+{% endblock content %}

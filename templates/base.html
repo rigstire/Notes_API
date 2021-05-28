@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> {% block title %} Note Taking API {% endblock title %} </title>
+    </head>
+
+    <body>
+        <a href = "{% url 'home' %}"> Home </a>
+
+        <div>
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </body>
+
+    </html>
