@@ -4,12 +4,23 @@
 
 {% block content %}
 
-{% for notes in object_list %}
-<div>
+{% if user.is_authenticated %}
 
-<h2><a href="{% url 'notes_detail' notes.pk %}">{{ notes.title }}</a></h2>
-</div>
+{% for notes in object_list %}
+<span class="border">
+
+
+<p class="font-italic"><a href="{% url 'notes_detail' notes.pk %}" style="color: black"> ☛ {{ notes.title }}</a></p>
 
 {% endfor %}
+
+    {% else %}
+
+<p class="font-italic"> &nbsp;&nbsp;&nbsp;&nbsp;Welcome to the Notes API! </p>
+</span>
+
+    {% endif %}
+
+
 
 {% endblock content %}

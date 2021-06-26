@@ -3,8 +3,11 @@
 {% block content %}
 
 <div class="post-entry">
-<h2>{{ notes.title }}</h2>
-<p>{{ notes.body }}</p>
+<h4>&emsp;{{ notes.title }}</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;{{ notes.body }}</p>
 </div>
+
+<p><a href = "{% url 'notes_update' notes.pk %}">&nbsp;&nbsp;&nbsp;&nbsp; + Edit Notes</a> </p>
+<p><a href = "{% url 'notes_delete' notes.pk %}">&nbsp;&nbsp;&nbsp;&nbsp; + Delete</a></p>
 
 {% endblock content %}
