@@ -1,7 +1,10 @@
 from django.db import models
 from django.urls import reverse
+from django.conf import settings
 
 class Notes(models.Model):
+
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=5, blank=True, null=False)
     title = models.CharField(max_length=300)
     body = models.TextField()
 
