@@ -5,6 +5,7 @@ from django.views.generic.detail import DetailView
 from .models import Notes
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 
 
 class HomePageView(ListView):
@@ -33,4 +34,14 @@ class NotesDeleteView(DeleteView):
     model = Notes
     template_name = 'notes_delete.html'
     success_url = reverse_lazy('home')
+
+class NotesSearchView(ListView):
+    model = Notes
+    template_name = 'search_notes.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        return Notes.objects.filter(
+            Q(title__icontains=query) | Q(body__icontains=query)
+        )
 

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Search{% endblock title %}
+
+{% block content %}
+
+{% for notes in object_list %}
+
+{% if notes.author == user %}
+
+<div>
+
+    <h3><a href="{{ notes.get_absolute_url }}">{{ notes.title }}</a></h3>
+    <p>{{ notes.title }}</p>
+    <p>{{ notes.body }}</p>
+
+</div>
+
+{% endif %}
+
+{% endfor %}
+
+{% endblock content %}

@@ -6,9 +6,19 @@
 
 {% if user.is_authenticated %}
 
+
+<form class="form-inline mt-2 mt-md-0" action="{% url 'search_notes' %}"
+method="get">
+<input name="q" class="form-control mr-sm-2" type="text" placeholder="Search"
+aria-label="Search">
+</form>
+
 {% for notes in object_list %}
 
 {% if notes.author == user %}
+
+
+
 <span class="border">
 
 
