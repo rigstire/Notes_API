@@ -25,4 +25,5 @@ urlpatterns = [
     path('',include('posts.urls')),
     path('accounts/',include('accounts.urls')),
 
+
 ]

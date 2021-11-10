@@ -9,9 +9,9 @@
 
 <form class="form-inline mt-2 mt-md-0" action="{% url 'search_notes' %}"
 method="get">
-<input name="q" class="form-control mr-sm-2" type="text" placeholder="Search"
+<input name="q" class="form-control mr-sm-2" typnnotese="text" placeholder="Search"
 aria-label="Search">
-</form>
+</form> 
 
 {% for notes in object_list %}
 
@@ -22,7 +22,7 @@ aria-label="Search">
 <span class="border">
 
 
-<p class="font-italic"><a href="{% url 'notes_detail' notes.pk %}" style="color: black"> ☛ {{ notes.title }}</a></p>
+<p class="font-italic"><a href="{% url 'notes_detail' notes.pk %}" style="color: black"> ☛ {{ notes.folder }}</a></p>
 
 {% endif %}
 
