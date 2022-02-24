@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     #third party
     'bootstrap4',
+    'django_htmx',
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
@@ -60,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_htmx.middleware.HtmxMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'

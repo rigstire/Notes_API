@@ -17,6 +17,8 @@ class Comment(models.Model):
     root_note = models.ForeignKey(Notes, on_delete=models.CASCADE, related_name='comments', null=True, blank=True)
     comment = models.TextField()
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    done = models.BooleanField(default=False)
+    
 
     def __str__(self):
         return self.comment

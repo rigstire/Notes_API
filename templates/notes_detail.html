@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="post-entry">
+<h4>&emsp;{{ notes.title }}</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;{{ notes.body }}</p>ee
+<p class="font-italic"> created {{ notes.date }} </p>
+
+{% for comment in notes.comments.all %}
+ <p>
+ <span class="font-weight-bold">
+ {{ comment.author }} &middot;
+ </span>
+ {{ comment }}
+ </p>
+ {% endfor %}
+
+<!-- <p><a href = "{% url 'new_comment' comment.pk%}">&nbsp;&nbsp;&nbsp;&nbsp; + Make Comment</a></p> -->
+<p><a href = "{% url 'notes_update' notes.pk %}">&nbsp;&nbsp;&nbsp;&nbsp; + Edit Notes</a> </p>
+<p><a href = "{% url 'notes_delete' notes.pk %}">&nbsp;&nbsp;&nbsp;&nbsp; + Delete</a></p>
+
+{% endblock content %}

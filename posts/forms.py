@@ -4,4 +4,10 @@ from .models import Notes, Comment
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = ['comment']
+        fields = ['comment', 'root_note']
+
+class DoneForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['done']
+

@@ -2,22 +2,32 @@
 
 {% block content %}
 
-
-
+<script src="https://unpkg.com/htmx.org@1.7.0" integrity="EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo" crossorigin="anonymous"></script>
 <style>
-    .note {
-      font-size: 80%;
-      color: g;
-    }
-    </style>
+  .myDiv {
+    background-color: rgb(250, 250, 250);
+    text-align: center;
+  }
+  </style>
+    <li><a class="myDiv" href="{% url 'comment_new' notes.pk%}">+ Create Sub-Note</a></li>
 
 
+
+<div id="comments"
+  hx-confirm="Confirm delete"
+  hx-target="#comments"
+  hx-swap="outerHTML">
+</div>
   {% for comment in comments %}
-    <h2>&nbsp;&nbsp;&nbsp;&nbsp;{{ comment }} <input type = "checkbox">
+    <h2>&nbsp;&nbsp;&nbsp;&nbsp;{{ comment }}
       <h5><a href = "{% url 'comment_update' comment.pk %}">+ Update sub note</a></h5> 
-      <h5><a href = "{% url 'comment_delete' comment.pk %}">+ Delete sub-note</a></h5>
+      <h5><a href = "{% url 'comment_delete' comment.pk %}">+ Delete sub note</a></h5>
+      {% include 'htmx/checkbox.html' %}
+
     </h2> 
   {% endfor %}
+
+
 
 
 {% endblock content %}

@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from .forms import CommentForm
-
+from django.views.decorators.http import require_http_methods
 
 
 class HomePageView(ListView):
@@ -88,25 +88,68 @@ class NotesSearchView(ListView):
     def get_queryset(self):
         query = self.request.GET.get('q')
         return Notes.objects.filter(
-            Q(title__icontains=query) | Q(body__icontains=query)
+            Q(folder__icontains=query) | Q(comments__icontains=query)
         )
+
+
 
 class CommentCreateView(CreateView):
     model = Comment
-    fields = ['comment', 'root_note']
+    fields = ['comment']
     template_name = 'comment/comment_new.html'
 
     def form_valid(self,form):
+        form.instance.root_note = Notes.objects.get(pk=self.kwargs.get('pk'))
         form.instance.author = self.request.user
         return super().form_valid(form)
+    
+    def get_success_url(self):
+        notes_id = self.object.root_note.pk
+        return reverse_lazy('notes_detail', kwargs={'pk':notes_id})
+
+    
 
 class CommentDeleteView(DeleteView):
     model = Comment
     template_name = 'comment/comment_delete.html'
-    success_url = reverse_lazy('home')
+    success_url = "/notes/notes_pk"
+
+    def get_success_url(self):
+        notes_id = self.object.root_note.id
+        return reverse_lazy('notes_detail', kwargs={'pk': notes_id})
+
+
+
+# @require_http_methods(['POST'])
+# def CommentDeleteView(request,comment_id):
+#     Comment.objects.filter(id=comment_id).delete()
+#     comments = Comment.objects.filter(user=request.user)
+#     return render(request,'notes_detail.html',
+#         {'comments':comments,
+#          'form':CommentForm(),
+#          })
+
 
 class CommentUpdateView(UpdateView):
     model = Comment
     fields = ['comment']
     template_name = 'comment/comment_update.html'
+
+    def get_success_url(self):
+        notes_id = self.object.root_note.id
+        return reverse_lazy('notes_detail', kwargs={'pk': notes_id})
+
+@require_http_methods(['POST'])
+def complete(request,comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    if comment.done == True:
+        comment.done = False
+    else:
+        comment.done = True
+    comment.save()
+    comments = Comment.objects.filter(user=request.user)
+    return render(request, "notes_detail.html",
+            {'done_form':DoneForm(),
+            'comments':comments,
+    })
 
