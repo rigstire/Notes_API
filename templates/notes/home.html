@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %} Home Page {% endblock title %} 
 
 {% block content %}
 
 {% if user.is_authenticated %}
 
+<link rel="stylesheet" href="{%static 'css/aline.css'%}">
 
 <form class="form-inline mt-2 mt-md-0" action="{% url 'search_notes' %}"
 method="get">

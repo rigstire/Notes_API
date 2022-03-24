@@ -12,9 +12,9 @@
         >
         <h1></h1>
         <label for="checkbox-notdone-{{comment.id}}">{{ comment.name }}  
-            <button class="close" 
+            <!-- <button class="close" 
                 hx-swap = "delete"
-                hx-post = "{% url 'comment_delete' comment.id %}"> &times; </button>
+                hx-post = "{% url 'comment_delete' comment.id %}"> &times; </button> -->
 </div>
 {% else %} 
 <div class="custom-checkbox">
@@ -26,5 +26,5 @@ hx-post= "{% url 'complete' comment.id %}"
 hx-trigger= "click"
 >
 <label for="checkbox-notdone-{{comment.id}}">{{ comment.name }}  </label>
-<button class="close" hx-post="{% url 'comment_delete' comment.id %}"> &times; </button>
+<!-- <button class="close" hx-post="{% url 'comment_delete' comment.id %}"> &times; </button> -->
 {% endif %}

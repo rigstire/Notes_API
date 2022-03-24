@@ -2,6 +2,12 @@
 
 {% block content %}
 
+{% load static %}
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" href="{% static 'css/position.css' %}">
+
 <script src="https://unpkg.com/htmx.org@1.7.0" integrity="EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo" crossorigin="anonymous"></script>
 <style>
   .myDiv {
@@ -9,21 +15,27 @@
     text-align: center;
   }
   </style>
-    <li><a class="myDiv" href="{% url 'comment_new' notes.pk%}">+ Create Sub-Note</a></li>
+    <li style = "left:80px; top:2px;"><a class="myDiv" href="{% url 'comment_new' notes.pk%}">+ Create Sub-Note</a></li>
 
 
 
 <div id="comments"
   hx-confirm="Confirm delete"
   hx-target="#comments"
-  hx-swap="outerHTML">
+  hx-swap="outerHTML">    
 </div>
-  {% for comment in comments %}
-    <h2>&nbsp;&nbsp;&nbsp;&nbsp;{{ comment }}
-      <h5><a href = "{% url 'comment_update' comment.pk %}">+ Update sub note</a></h5> 
-      <h5><a href = "{% url 'comment_delete' comment.pk %}">+ Delete sub note</a></h5>
-      {% include 'htmx/checkbox.html' %}
 
+  <body>
+  {% for comment in comments %}
+      <div>
+        <h1 class = "flex">{{ comment }} {% include 'htmx/checkbox.html' %}
+        <a class = "size" href = "{% url 'comment_update' comment.pk %}">✎</a>
+        <a class ="size" href = "{% url 'comment_delete' comment.pk %}">✂</a>
+      </h1>
+      </div>
+
+    </body>
+    
     </h2> 
   {% endfor %}
 
